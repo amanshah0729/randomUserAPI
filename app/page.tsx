@@ -2,14 +2,14 @@ import { Payment, columns } from "./columns"
 import { DataTable } from "./data-table"
 
 // Import necessary modules for database operations
-import axios from 'axios';
 
 // Function to generate and save 10 random users
 async function generateAndSaveRandomUsers() {
   const users = [];
   for (let i = 0; i < 10; i++) {
-    const response = await axios.get('https://randomuser.me/api/');
-    const user = response.data.results[0];
+    const response = await fetch('https://randomuser.me/api/');
+    const data = await response.json();
+    const user = data.results[0];
     users.push(user);
     // Save user to your database here
     // Example: await saveUserToDatabase(user);

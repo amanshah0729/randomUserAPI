@@ -20,6 +20,7 @@ export type Payment = {
   picture: string
   status: "pending" | "processing" | "success" | "failed"
   email: string
+  lastName: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -37,7 +38,7 @@ export const columns: ColumnDef<Payment>[] = [
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuLabel>{payment.lastName}</DropdownMenuLabel>
                 <DropdownMenuItem
                   onClick={() => navigator.clipboard.writeText(payment.id)}
                 >
@@ -67,5 +68,6 @@ export const columns: ColumnDef<Payment>[] = [
       return <img src={imageUrl} alt="Payment Image" style={{ width: '50px', height: '50px' }} />;
     },
   },
+  
 // ... existing code ...
 ]
