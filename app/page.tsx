@@ -5,25 +5,27 @@ import { DataTable } from "./data-table"
 
 // Function to generate and save 10 random users
 async function generateAndSaveRandomUsers() {
-  const users = [];
-  for (let i = 0; i < 10; i++) {
-    const response = await fetch('https://randomuser.me/api/');
-    const data = await response.json();
-    const user = data.results[0];
-    users.push(user);
-    // Save user to your database here
-    // Example: await saveUserToDatabase(user);
-  }
+  const response = await fetch('https://randomuser.me/api/?results=10');
+  const data = await response.json();
+  const users = data.results;
+  // Save users to your database here
+  // Example: await saveUserToDatabase(users);
   console.log('10 random users generated and saved:', users[0]);
   return users;
-
 }
 
 // Call the function to generate and save users
 
+// Define a User interface
+interface User {
+  picture: { large: string };
+  name: { first: string; last: string };
+  email: string;
+}
+
 async function getData(): Promise<Payment[]> {
   const users = await generateAndSaveRandomUsers();
-  return users.map((user, index) => ({
+  return users.map((user: User, index: number) => ({
     id: `user-${index}`,
     picture: user.picture['large'],
     status: user.name['first'],
