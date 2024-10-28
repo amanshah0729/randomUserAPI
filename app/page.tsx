@@ -22,17 +22,14 @@ async function generateAndSaveRandomUsers() {
 // Call the function to generate and save users
 
 async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
   const users = await generateAndSaveRandomUsers();
   return users.map((user, index) => ({
     id: `user-${index}`,
-    amount: user.picture['large'], // Pass the URL
+    picture: user.picture['large'],
     status: user.name['first'],
     email: user.email,
+    lastName: user.name['last'], // Add this line
   }));
-
-    // ...
-  
 }
 
 export default async function DemoPage() {
